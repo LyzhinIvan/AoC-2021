@@ -2,6 +2,8 @@
 Author: Scoder12
 Original: https://repl.it/@Scoder12/aoc-python-template#runner.py"""
 
+from argparse import ArgumentParser
+from datetime import date
 import time
 import math
 from typing import Any
@@ -80,6 +82,11 @@ def run(day, year=2021):
 
 
 def get_day(max_day=None):
+    parser = ArgumentParser()
+    parser.add_argument('--auto-day', action='store_true')
+    args = parser.parse_args()
+    if args.auto_day:
+        return (date.today() - date(2021, 12, 1)).days + 1
     while True:
         prompt = f"Enter day" + (f" (max {max_day})" if max_day else '')
         inp = input(prompt + ": ")
