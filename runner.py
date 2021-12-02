@@ -8,9 +8,9 @@ import time
 import math
 from typing import Any
 
-def format_filename(day):
+def format_filename(day, example=False):
     # You can customize this to your liking.
-    return str(day).zfill(2)
+    return str(day).zfill(2) + ('_example' if example else '')
 
 
 def format_runtime(ms):
@@ -34,12 +34,15 @@ def format_runtime(ms):
     return f"{math.floor(sec / 60)}m " + format_runtime((sec % 60)* 1000)
 
 
-def run_part(part: str, mod: Any, data: str):
+def run_part(part: str, mod: Any, data: str, example_data: str):
     funcname = f'part{part}'
 
     f = getattr(mod, funcname, None)
     if callable(f):
         print(f"Running Part {part}")
+
+        example_val = f(example_data)
+        print(f"Example Output: {example_val}")
 
         start = time.perf_counter()
         val = f(data)
@@ -56,9 +59,9 @@ def run_part(part: str, mod: Any, data: str):
     return rtime
 
 
-def get_data(day):
+def get_data(day, example=False):
     # Try to find the filename
-    fname = format_filename(day) + ".txt"
+    fname = format_filename(day, example=example) + ".txt"
     try:
         with open(fname, "r") as f:
             data = f.read()
@@ -74,9 +77,10 @@ def run(day, year=2021):
 
     mod = __import__(format_filename(day))
     data = get_data(day)
+    example_data = get_data(day, example=True)
 
-    part1Time = run_part(1, mod, data)
-    part2Time = run_part(2, mod, data)
+    part1Time = run_part(1, mod, data, example_data)
+    part2Time = run_part(2, mod, data, example_data)
     if part1Time != 0 and part2Time != 0:
         print(f"Total runtime: {format_runtime(part1Time + part2Time)}")
 
