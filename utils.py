@@ -63,3 +63,16 @@ def try_parse_float(value):
         return float(value)
     except ValueError:
         return None
+
+
+def neighbors4(i, j, h, w):
+    for di, dj in ((-1, 0), (1, 0), (0, 1), (0, -1)):
+        if 0 <= i + di < h and 0 <= j + dj < w:
+            yield (i + di, j + dj)
+
+
+def neighbors8(i, j, h, w):
+    for di in (-1, 0, 1):
+        for dj in (-1, 0, 1):
+            if (di != 0 or dj != 0) and 0 <= i + di < h and 0 <= j + dj < w:
+                yield (i + di, j + dj)
