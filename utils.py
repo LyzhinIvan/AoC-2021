@@ -1,3 +1,4 @@
+from typing import Iterator
 import re
 
 
@@ -80,3 +81,13 @@ def neighbors8(i, j, h, w):
 
 def inv_dict(d: dict) -> dict:
     return dict((value, key) for key, value in d.items())
+
+
+def minmax(iterable):
+    if not isinstance(iterable, Iterator):
+        iterable = iter(iterable)
+    mn = mx = next(iterable)
+    for value in iterable:
+        mn = min(mn, value)
+        mx = max(mx, value)
+    return mn, mx
