@@ -76,3 +76,7 @@ def neighbors8(i, j, h, w):
         for dj in (-1, 0, 1):
             if (di != 0 or dj != 0) and 0 <= i + di < h and 0 <= j + dj < w:
                 yield (i + di, j + dj)
+
+
+def inv_dict(d: dict) -> dict:
+    return dict((value, key) for key, value in d.items())
