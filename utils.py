@@ -91,3 +91,7 @@ def minmax(iterable):
         mn = min(mn, value)
         mx = max(mx, value)
     return mn, mx
+
+
+def parse_field(input, type):
+    return list(map(lambda line: list(map(type, list(line))), input.strip().split('\n')))

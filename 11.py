@@ -31,16 +31,12 @@ def simulate_step(field):
     return flash_count
 
 
-def parse_field(input):
-    return list(map(lambda line: list(map(int, list(line))), input.strip().split('\n')))
-
-
 def part1(input):
-    field = parse_field(input)
+    field = parse_field(input, int)
     return sum(simulate_step(field) for _ in range(100) )
 
 
 def part2(input):
-    field = parse_field(input)
+    field = parse_field(input, int)
     h, w = len(field), len(field[0])
     return next(step for step in range(1, 1000) if simulate_step(field) == h * w)
